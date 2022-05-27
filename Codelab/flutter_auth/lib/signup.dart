@@ -39,6 +39,7 @@ class Signup extends StatelessWidget {
                 Container(
                   child: Row(
                     children: <Widget>[
+                      SizedBox(width: 0),
                       Text('Have Account? ',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18)),

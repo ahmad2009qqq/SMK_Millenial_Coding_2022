@@ -43,8 +43,8 @@ class Login extends StatelessWidget {
 
           Row(
             children: <Widget>[
-              SizedBox(width: 30),
-              Text('Have no Account? ',
+              SizedBox(width: 50),
+              Text(' Have no Account? ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               GestureDetector(
                 onTap: () {
