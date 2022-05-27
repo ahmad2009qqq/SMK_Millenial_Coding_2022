@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: const Center(
-        child: Text('Welcome Home'),
+        child: Text('Welcome Home Page'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
