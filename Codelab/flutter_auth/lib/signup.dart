@@ -25,7 +25,7 @@ class Signup extends StatelessWidget {
           ),
           SizedBox(height: 50),
           Text(
-            'Welcome!',
+            '  Welcome!',
             style: TextStyle(fontSize: 24),
           ),
           Padding(
@@ -39,7 +39,7 @@ class Signup extends StatelessWidget {
                 Container(
                   child: Row(
                     children: <Widget>[
-                      SizedBox(width: 0),
+                      SizedBox(width: 80),
                       Text('Have Account? ',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18)),
@@ -86,19 +86,24 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
+
   String? email;
   String? password;
   String? name;
-  bool _obscureText = false;
+
+  bool _obscureText = false; //show entered passwod for the user to read
+
   bool agree = false;
   final pass = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var border = OutlineInputBorder(
+    // initiate border for password icon
+    var _border = OutlineInputBorder(
       borderRadius: BorderRadius.all(
         const Radius.circular(100.0),
       ),
     );
+
     var space = SizedBox(height: 10);
     return Form(
       key: _formKey,
@@ -110,10 +115,10 @@ class _SignupFormState extends State<SignupForm> {
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email_outlined),
                 labelText: 'Email',
-                border: border),
+                border: _border),
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter your email';
               }
               return null;
             },
@@ -126,28 +131,30 @@ class _SignupFormState extends State<SignupForm> {
 // password
           TextFormField(
             controller: pass,
+            obscureText: !_obscureText,
             decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock_outline),
-              border: border,
+              border: _border,
               suffixIcon: GestureDetector(
+                child: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                ),
                 onTap: () {
                   setState(() {
                     _obscureText = !_obscureText;
                   });
                 },
-                child: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                ),
               ),
             ),
             onSaved: (val) {
               password = val;
             },
-            obscureText: !_obscureText,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter your password';
+              } else if (value.length < 6) {
+                return 'Password to short';
               }
               return null;
             },
@@ -158,12 +165,27 @@ class _SignupFormState extends State<SignupForm> {
             decoration: InputDecoration(
               labelText: 'Confirm Password',
               prefixIcon: Icon(Icons.lock_outline),
-              border: border,
+              border: _border,
+              suffixIcon: GestureDetector(
+                child: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                ),
+                onTap: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              ),
             ),
-            obscureText: true,
+            // obscureText: true,
+
             validator: (value) {
-              if (value != pass.text) {
+              if (value!.isEmpty) {
+                return 'Please re-enter your password';
+              } else if (value != pass.text) {
                 return 'password not match';
+              } else if (value.length < 6) {
+                return 'Password to short';
               }
               return null;
             },
@@ -174,14 +196,14 @@ class _SignupFormState extends State<SignupForm> {
             decoration: InputDecoration(
               labelText: 'Full name',
               prefixIcon: Icon(Icons.account_circle),
-              border: border,
+              border: _border,
             ),
             onSaved: (val) {
               name = val;
             },
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter some name';
+                return 'Please enter your full name';
               }
               return null;
             },
@@ -233,7 +255,10 @@ class _SignupFormState extends State<SignupForm> {
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
-              child: Text('Sign Up'),
+              child: Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
         ],

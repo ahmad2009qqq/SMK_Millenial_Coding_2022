@@ -76,10 +76,17 @@ class _LoginFormState extends State<LoginForm> {
   String? email;
   String? password;
 
-  bool _obscureText = true;
+  bool _obscureText = false; //show entered passwod for the user to read
 
   @override
   Widget build(BuildContext context) {
+    // initiate border for password icon
+    var _border = OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        const Radius.circular(100.0),
+      ),
+    );
+
     return Form(
       key: _formKey,
       child: Column(
@@ -91,15 +98,11 @@ class _LoginFormState extends State<LoginForm> {
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.email_outlined),
               labelText: 'Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  const Radius.circular(100.0),
-                ),
-              ),
+              border: _border,
             ),
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter your email';
               }
               return null;
             },
@@ -114,32 +117,30 @@ class _LoginFormState extends State<LoginForm> {
           // password
           TextFormField(
             // initialValue: 'Input text',
+            obscureText: !_obscureText,
             decoration: InputDecoration(
               labelText: 'Password',
               prefixIcon: Icon(Icons.lock_outline),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  const Radius.circular(100.0),
-                ),
-              ),
+              border: _border,
               suffixIcon: GestureDetector(
+                child: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                ),
                 onTap: () {
                   setState(() {
                     _obscureText = !_obscureText;
                   });
                 },
-                child: Icon(
-                  _obscureText ? Icons.visibility_off : Icons.visibility,
-                ),
               ),
             ),
-            obscureText: _obscureText,
             onSaved: (val) {
               password = val;
             },
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter your password';
+              } else if (value.length < 6) {
+                return 'Password to short';
               }
               return null;
             },
@@ -179,7 +180,7 @@ class _LoginFormState extends State<LoginForm> {
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
               child: Text(
                 'Login',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ),
