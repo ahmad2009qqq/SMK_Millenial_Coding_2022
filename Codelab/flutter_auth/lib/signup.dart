@@ -47,7 +47,7 @@ class Signup extends StatelessWidget {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Text(' Log in!',
+                        child: Text('Log in!',
                             style: TextStyle(fontSize: 18, color: Colors.blue)),
                       )
                     ],
@@ -166,19 +166,18 @@ class _SignupFormState extends State<SignupForm> {
               labelText: 'Confirm Password',
               prefixIcon: Icon(Icons.lock_outline),
               border: _border,
-              suffixIcon: GestureDetector(
-                child: Icon(
-                  _obscureText ? Icons.visibility : Icons.visibility_off,
-                ),
-                onTap: () {
-                  setState(() {
-                    _obscureText = !_obscureText;
-                  });
-                },
-              ),
+              // suffixIcon: GestureDetector(
+              //   child: Icon(
+              //     _obscureText ? Icons.visibility : Icons.visibility_off,
+              //   ),
+              //   onTap: () {
+              //     setState(() {
+              //       _obscureText = !_obscureText;
+              //     });
+              //   },
+              // ),
             ),
-            // obscureText: true,
-
+            obscureText: true,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please re-enter your password';
@@ -220,7 +219,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
               Flexible(
                 child: Text(
-                    'By creating account, I agree to Terms & Conditions and Privacy Policy.'),
+                    'By creating account, I agree to terms & conditions and privacy policy.'),
               ),
             ],
           ),

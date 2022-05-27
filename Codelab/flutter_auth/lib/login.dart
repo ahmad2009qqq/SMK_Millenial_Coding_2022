@@ -150,7 +150,7 @@ class _LoginFormState extends State<LoginForm> {
 
           SizedBox(
             height: 54,
-            width: 184,
+            width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
