@@ -109,6 +109,7 @@ class _LoginFormState extends State<LoginForm> {
             onSaved: (val) {
               email = val;
             },
+            keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(
             height: 20,
