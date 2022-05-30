@@ -29,6 +29,7 @@ class AuthenticationHelper {
   //Sign out method
   Future signOut() async {
     await _auth.signOut();
+    // ignore: avoid_print
     print('Signout');
   }
 }

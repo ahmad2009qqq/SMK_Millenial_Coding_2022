@@ -17,38 +17,38 @@ class Login extends StatelessWidget {
           Column(
             children: [
               Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Image.asset('assets/logo-utter-academy-white.png')),
-              SizedBox(height: 50),
-              Text(
+              const SizedBox(height: 50),
+              const Text(
                 'Welcome',
                 style: TextStyle(fontSize: 24),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: LoginForm(),
           ),
 
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           Row(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 width: 50,
               ),
-              Text(' Have bo Account? ',
+              const Text(' Have bo Account? ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Signup()));
+                      MaterialPageRoute(builder: (context) => const Signup()));
                 },
-                child: Text('Register Now!',
+                child: const Text('Register Now!',
                     style: TextStyle(fontSize: 18, color: Colors.blue)),
               )
             ],
@@ -60,13 +60,13 @@ class Login extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  LoginForm({Key? key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  MyLoginFormState createState() => MyLoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class MyLoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
   String? email;
@@ -76,9 +76,9 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    var _border = OutlineInputBorder(
+    var myborder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        const Radius.circular(100.0),
+        Radius.circular(100.0),
       ),
     );
 
@@ -90,9 +90,9 @@ class _LoginFormState extends State<LoginForm> {
           //form input email
           TextFormField(
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email_outlined),
+              prefixIcon: const Icon(Icons.email_outlined),
               labelText: 'Email',
-              border: _border,
+              border: myborder,
             ),
             validator: (value) {
               if (value!.isEmpty) {
@@ -105,7 +105,7 @@ class _LoginFormState extends State<LoginForm> {
             },
             keyboardType: TextInputType.emailAddress,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
 
@@ -114,8 +114,8 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: !_obscureText,
             decoration: InputDecoration(
                 labelText: 'Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: _border,
+                prefixIcon: const Icon(Icons.lock_outline),
+                border: myborder,
                 suffixIcon: GestureDetector(
                   child: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
@@ -137,6 +137,10 @@ class _LoginFormState extends State<LoginForm> {
             },
           ),
 
+          const SizedBox(
+            height: 10,
+          ),
+
           SizedBox(
             height: 54,
             width: double.infinity,
@@ -149,14 +153,16 @@ class _LoginFormState extends State<LoginForm> {
                       .signIn(email: email!, password: password!)
                       .then((result) {
                     if (result == null) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (countext) => Home()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (countext) => const Home()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
                             result,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
                       );
@@ -165,9 +171,9 @@ class _LoginFormState extends State<LoginForm> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
-              child: Text('Login', style: TextStyle(fontSize: 20)),
+              child: const Text('Login', style: TextStyle(fontSize: 20)),
             ),
           ),
         ],

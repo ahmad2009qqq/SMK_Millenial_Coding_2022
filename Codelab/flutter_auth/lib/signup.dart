@@ -9,50 +9,50 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: <Widget>[
-          SizedBox(height: 80),
+          const SizedBox(height: 80),
           // logo
           Column(
             children: [
               Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Image.asset('assets/logo-utter-academy.png')),
               // FlutterLogo(
               //   size: 55,
               // ),
             ],
           ),
-          SizedBox(height: 50),
-          Text(
+          const SizedBox(height: 50),
+          const Text(
             '  Welcome!',
             style: TextStyle(fontSize: 24),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: SignupForm(),
           ),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(width: 80),
-                      Text('Have Account? ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('Log in!',
-                            style: TextStyle(fontSize: 18, color: Colors.blue)),
-                      )
-                    ],
-                  ),
-                )
+                // Container(child:
+                Row(
+                  children: <Widget>[
+                    const SizedBox(width: 80),
+                    const Text('Have Account? ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Log in!',
+                          style: TextStyle(fontSize: 18, color: Colors.blue)),
+                    )
+                  ],
+                ),
+                // )
               ],
             ),
           ),
@@ -65,10 +65,10 @@ class Signup extends StatelessWidget {
     return Container(
       height: 80,
       width: 80,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: Colors.blue),
-      child: Center(
+      child: const Center(
         child: Text(
           "T",
           style: TextStyle(color: Colors.white, fontSize: 60.0),
@@ -79,8 +79,9 @@ class Signup extends StatelessWidget {
 }
 
 class SignupForm extends StatefulWidget {
-  SignupForm({Key? key}) : super(key: key);
+  const SignupForm({Key? key}) : super(key: key);
   @override
+  // ignore: library_private_types_in_public_api
   _SignupFormState createState() => _SignupFormState();
 }
 
@@ -94,17 +95,17 @@ class _SignupFormState extends State<SignupForm> {
   bool _obscureText = false; //show entered passwod for the user to read
 
   bool agree = false;
-  final pass = new TextEditingController();
+  final pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     // initiate border for password icon
-    var _border = OutlineInputBorder(
+    var myborder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        const Radius.circular(100.0),
+        Radius.circular(100.0),
       ),
     );
 
-    var space = SizedBox(height: 10);
+    var space = const SizedBox(height: 10);
     return Form(
       key: _formKey,
       child: Column(
@@ -113,9 +114,9 @@ class _SignupFormState extends State<SignupForm> {
 // email
           TextFormField(
             decoration: InputDecoration(
-                prefixIcon: Icon(Icons.email_outlined),
+                prefixIcon: const Icon(Icons.email_outlined),
                 labelText: 'Email',
-                border: _border),
+                border: myborder),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Please enter your email';
@@ -134,8 +135,8 @@ class _SignupFormState extends State<SignupForm> {
             obscureText: !_obscureText,
             decoration: InputDecoration(
               labelText: 'Password',
-              prefixIcon: Icon(Icons.lock_outline),
-              border: _border,
+              prefixIcon: const Icon(Icons.lock_outline),
+              border: myborder,
               suffixIcon: GestureDetector(
                 child: Icon(
                   _obscureText ? Icons.visibility : Icons.visibility_off,
@@ -164,8 +165,8 @@ class _SignupFormState extends State<SignupForm> {
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Confirm Password',
-              prefixIcon: Icon(Icons.lock_outline),
-              border: _border,
+              prefixIcon: const Icon(Icons.lock_outline),
+              border: myborder,
               // suffixIcon: GestureDetector(
               //   child: Icon(
               //     _obscureText ? Icons.visibility : Icons.visibility_off,
@@ -194,8 +195,8 @@ class _SignupFormState extends State<SignupForm> {
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Full name',
-              prefixIcon: Icon(Icons.account_circle),
-              border: _border,
+              prefixIcon: const Icon(Icons.account_circle),
+              border: myborder,
             ),
             onSaved: (val) {
               name = val;
@@ -217,13 +218,13 @@ class _SignupFormState extends State<SignupForm> {
                 },
                 value: agree,
               ),
-              Flexible(
+              const Flexible(
                 child: Text(
                     'By creating account, I agree to terms & conditions and privacy policy.'),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           // signUP button
@@ -238,13 +239,15 @@ class _SignupFormState extends State<SignupForm> {
                       .signUp(email: email!, password: password!)
                       .then((result) {
                     if (result == null) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Home()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
                           result,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ));
                     }
@@ -252,9 +255,9 @@ class _SignupFormState extends State<SignupForm> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
-              child: Text(
+              child: const Text(
                 'Sign Up',
                 style: TextStyle(fontSize: 20),
               ),
